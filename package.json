@@ -1,0 +1,27 @@
+{
+  "name": "apinodejs",
+  "version": "1.0.0",
+  "description": "Api de Estudo",
+  "author": "Rafael Nascimento <rkrafael.nascimento@gmail.com>",
+  "homepage": "https://github.com/RKRafaelNascimento/workFlow#readme",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "fastify": "^1.13.3"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RKRafaelNascimento/Api-NodeJs-Fastify.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RKRafaelNascimento/Api-NodeJs-Fastify/issues"
+  }
+}
