@@ -1,5 +1,5 @@
 const User = require('./user-model')
 
-module.export = {
+module.exports = {
   User
 }
