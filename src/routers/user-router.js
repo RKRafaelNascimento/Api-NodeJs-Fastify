@@ -55,6 +55,12 @@ async function routes (fastify, options) {
         request.body.email,
         request.body.password
       )
+      const token = fastify.jwt.sign({
+        id: response.data.id,
+        email: response.data.email,
+        name: response.data.username
+      })
+      response.token = token
       reply.status(200).send(response)
     } catch (err) {
       reply.status(401).send({

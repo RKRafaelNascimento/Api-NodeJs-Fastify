@@ -61,7 +61,8 @@ class UserService {
     try {
       const user = await User.findOne({
         where: {
-          [Op.or]: [{ email: email }, { password: password }]
+          email,
+          password
         }
       })
       if (user == null) {
@@ -76,7 +77,7 @@ class UserService {
           name: user.username
         }
       }
-
+      console.log(result)
       return result
     } catch (err) {
       let msg = 'Ocorreu um erro ao processar a requisição.'

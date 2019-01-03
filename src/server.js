@@ -16,13 +16,42 @@ fastify.decorate('authenticate', async function (request, reply) {
   }
 })
 
+fastify.register(require('fastify-swagger'), {
+  exposeRoute: true,
+  routePrefix: '/swagger',
+  swagger: {
+    info: {
+      title: 'Study',
+      version: '0.1.0'
+    },
+    // host: 'localhost:8080',
+    schemes: ['http'],
+    consumes: ['application/json'],
+    produces: ['application/json'],
+    tags: [{ name: 'Study-Api', description: 'Study-Api documentation.' }],
+    securityDefinitions: {
+      ApiKeyAuth: {
+        type: 'apiKey',
+        in: 'header',
+        name: 'Authorization'
+      }
+    }
+  }
+})
+
 for (const i in routers) {
   fastify.register(routers[i])
 }
 
 const start = async () => {
   try {
-    // await sqlize.connectionManager.connect(sqlize.options)
+    await sqlize.connectionManager.connect(sqlize.options)
+    fastify.ready(err => {
+      if (err) {
+        throw err
+      }
+      fastify.swagger()
+    })
     await fastify.listen(port, '0.0.0.0')
     fastify.log.info(`server listening on ${fastify.server.address().port}`)
     console.log(`server listening on ${fastify.server.address().port}`)
