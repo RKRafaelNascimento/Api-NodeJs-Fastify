@@ -1,4 +1,6 @@
 const { User } = require('../models/index')
+const sqlize = require('sequelize')
+const Op = sqlize.Op
 
 class UserService {
   static async findUser () {
@@ -59,11 +61,9 @@ class UserService {
     try {
       const user = await User.findOne({
         where: {
-          email,
-          password: password
+          [Op.or]: [{ email: email }, { password: password }]
         }
       })
-
       if (user == null) {
         return `Usuario ou senha invalido`
       }
